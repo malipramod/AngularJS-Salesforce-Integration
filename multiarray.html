@@ -1,0 +1,42 @@
+<html ng-app="demoApp">
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<script>
+		var app = angular.module('demoApp', []);
+		var ctrl = app.controller("multiSelContr",function($scope){
+		$scope.outputOption1=[];
+		$scope.options =[
+			{key:false,Web:'Google'},
+			{key:true,Web:'Facebook'},
+			{key:false,Web:'Youtube'},
+			{key:true,Web:'Baidu'}
+			];
+
+		$scope.selectTrue=function() {
+			angular.forEach($scope.options, function(option) {
+			  if(option.key == true){
+				$scope.outputOption1.push(option.Web);
+			  }
+			});
+		}				
+		});
+
+	</script>
+
+<span>Select</span>
+<body ng-controller="multiSelContr">
+<table border="1">
+    <tr ng-repeat="row in options"  >             
+        <td ng-repeat="col in row">{{col}}</td>
+    </tr>
+</table>
+
+<br>
+
+<input type="button" value="add" ng-click="selectTrue()" /><br/>
+<span>Output</span>
+
+ <select ng-model="outputOption" ng-options="o as o for o in outputOption1">
+			
+        </select> 
+</body>

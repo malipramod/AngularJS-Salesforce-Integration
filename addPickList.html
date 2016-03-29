@@ -1,0 +1,38 @@
+<html ng-app="pickListPicker">
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	
+	<script>
+		var app=angular.module("pickListPicker",[]);
+		var ctrl = app.controller("pickListPickerController",function($scope){
+			//$scope.options=[
+			//	'India','USA'
+		//	];
+		$scope.selectedVal=[];
+		$scope.addVal=function(){			
+			$scope.selectedVal.push($scope.con);
+		}
+		});
+	</script>
+	<body>
+	<div data-ng-controller="pickListPickerController">   
+    <div>
+        Choose a new activity:
+        <select ng-model="con" >
+			<option>1</option>
+			<option>2</option>
+			<option>3</option>
+			<option>4</option>
+        </select>
+		
+		<input type="button" value="add" ng-click="addVal()"/>
+		<br/>		
+		 <select ng-model="selectedVal" ng-options="o as o for o in selectedVal">
+			
+        </select>
+		
+    </div>
+</div>
+	
+	</body>
+</html>

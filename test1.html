@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+
+<html ng-app="app">
+
+ 
+ <head>
+ 
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.17/angular.min.js"></script>
+   
+   <script>
+	var app=angular.module('app', []);
+	var contr=app.controller('MoveCtrl', function($scope) {
+        
+   
+
+    $scope.moveItem = function(item, from, to) {
+
+  
+      console.log('Move item   Item: '+item+' From:: '+from+' To:: '+to);
+    
+     var idx=from.indexOf(item);
+   
+     if (idx != -1) {
+    
+        from.splice(idx, 1);
+  
+          to.push(item);      
+ 
+       }
+    };
+   
+          
+
+
+    $scope.selectedclients = [];   
+    $scope.availableclients = [
+		 {
+        id: 1, 
+        name: 'Sarjan'
+      }, 
+   
+		   {
+        id: 2, 
+        name: 'Shrusti'
+      },
+
+		      {
+        id: 3,
+        name: 'Vandit'
+      }
+    ];
+  });  
+  </script>
+ 
+ </head>
+
+ 
+ <body ng-controller="MoveCtrl">
+    
+<h1>input</h1>
+    
+   
+ 
+   
+ <select size="5" multiple ng-model="available" ng-options="client as client.name for client in availableclients" ></select>       
+ <br> 
+
+<br> 
+   <input id="moveright" type="button" value="Add Client" ng-click="moveItem(available[0], availableclients,selectedclients)"/>
+  
+  
+   
+ <input id="move left" type="button" value="Remove Client" ng-click="moveItem(selected[0], selectedclients,availableclients)" />    
+
+   
+
+  
+  <br><br><label for="sclients">Selected Clients</label>                                                    
+   
+ <br><select size="5" multiple ng-model="selected" ng-options="client as client.name for client in selectedclients" ></select>
+ 
+   
+
+  </body>
+
+</html>

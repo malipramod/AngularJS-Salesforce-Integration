@@ -1,0 +1,39 @@
+
+<html ng-app="demoApp">
+         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<script>
+	    var app=angular.module("demoApp",[]);
+		var ctrl=app.controller("demoController",function($scope){
+		 $scope.Pickval=[];
+		 $scope.options=[
+		 {id:1,Dept:'EC'},
+		 {id:2,Dept:'IT'},
+		 {id:3,Dept:'CE'},
+		 {id:4,Dept:'Mech'},
+		 {id:5,Dept:'Civil'}];
+		 //$scope.Pick=function(){
+		//	$scope.myselect1 = $scope.myselect;
+		//	}
+	  
+	//  $scope.selectedCity = $scope.cities[0];
+		$scope.Addvalue=function(){
+		angular.forEach($scope.options, function(option) {			   
+			if(option.id==true)
+				$scope.Pickval.push(option.Dept);
+			  		  
+			});
+	    
+	  }
+		 
+		
+		});
+		</script>
+		<body ng-controller="demoController">
+		<select multiple ng-model="myselect" ng-options="o.id as o.Dept for o in options" />
+		<input type="button" value="Transfer" ng-click="Addvalue()"/>
+		<select multiple ng-model="Pickval"  ng-options="o.Dept as o for o in Pickval" />
+		
+			
+		</body>
+		</html>
