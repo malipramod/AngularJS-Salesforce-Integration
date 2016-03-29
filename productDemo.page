@@ -1,0 +1,37 @@
+<apex:page controller="angularJSBasicController" sidebar="false" showHeader="false">
+ <html ng-app="demoApp">
+     <head>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular.min.js"></script>
+            <script>
+                var app=angular.module('demoApp',[]);
+                var controller = app.controller('DemoCtrl',function($scope){
+                    $scope.allProducts={!allProducts};
+                    console.log($scope.allProducts);
+                    $scope.addProduct =function(){
+                        alert($scope.newProduct)   ;
+                         Visualforce.remoting.Manager.invokeAction(
+                        	 '{!$RemoteAction.angularJSBasicController.addProductToSalesforce}',$scope.newProduct,
+                        	 function(result, event) {
+                        		$scope.allProducts=result;
+                         		$scope.$apply();
+                        	 }); 
+                     }
+                });
+                
+            </script>
+     </head>
+        <body ng-controller="DemoCtrl">
+            <center>
+            <input type="text" name="txt1" placeholder="Search here" ng-model="searchValue"/>
+            <input type="text" name="newProduct" placeholder="New Product" ng-model="newProduct"/>
+            <input type="button" name="add"  value="Add" ng-click="addProduct()"/> 
+            <table>
+                <tr ng-repeat ="product in allProducts |filter:searchValue"> 
+                    <td>{{product.Name}}</td>
+                </tr>
+            </table>
+            </center>
+        </body>
+</html>
+</apex:page>
