@@ -1,0 +1,66 @@
+<apex:page controller="Product2HandlerCntr" showHeader="false" sidebar="false">
+    <html lang="en">
+        
+        <head>
+            
+            <title>Inserting Multiple Record using Wrapper class</title>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular.min.js"></script>
+            <script>
+            
+            angular.module('demoApp', []).controller('demoController', function($scope) {
+                
+                $scope.contacts = [];
+                $scope.allProducts={!allProducts};
+                $scope.addContact = function() {
+                    $scope.contacts.push({
+                    })
+                }
+                
+                $scope.removeContact = function() {
+                    $scope.contacts.pop({
+                    })
+                }
+                
+                $scope.saveContact=function(){
+                    Visualforce.remoting.Manager.invokeAction( 
+                        '{!$RemoteAction.Product2HandlerCntr.saveProduct}',JSON.stringify($scope.name,
+                         JSON.stringify($scope.description,JSON.stringify($scope.productCode),
+                          function(result, event) {
+                                                                                                              
+                       });
+                  }
+           });
+                        </script>
+        </head>
+        
+        <body ng-app="demoApp">
+            <div id="ctrl-as-exmpl" ng-controller="demoController">
+                <br/><br/>
+                <center>
+                 Name:<input type="text" ng-model="Product.name" />                       
+                    Code:<input type="text" ng-model="Product.description" />                       
+                    Config Type:<input type="text" ng-model="Product.productCode" />  -->
+                    <button type="button" ng-click="addContact()" accesskey="a">add</button>
+                    <button type="button" ng-click="removeContact()" accesskey="r">Remove</button>
+                    <br/><br/>
+                    <span ng-repeat="Product in allProducts">
+                        Name:<input type="text" ng-model="Product.name" />                       
+                        Code:<input type="text" ng-model="Product.description" />                       
+                        Config Type:<input type="text" ng-model="Product.productCode" /> 
+                        <button type="button" ng-click="addContact()" accesskey="a">add</button>
+                        <button type="button" ng-click="removeContact()" accesskey="r">Remove</button><br/><br/>
+                    </span>
+                    
+                    
+                    
+                    <button type="button" ng-click="saveContact()" accesskey="s">Save</button>
+                </center>
+                
+                
+                
+            </div>
+        </body>
+        
+    </html>
+</apex:page>
